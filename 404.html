@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PR Deployment Not Found</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+        }
+        .logo {
+            max-width: 300px;
+            margin-bottom: 2rem;
+        }
+        .title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        .message {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .url-info {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .pr-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.75rem 2rem;
+            background: #0366d6;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .pr-link:hover {
+            background: #0256c4;
+        }
+        .info {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 0.5rem;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img
+            src="https://cismet.de/images/cismet_signet_rgb_buntesC.png"
+            alt="cismet Logo"
+            class="logo"
+        />
+        <div class="title">🔍 PR Deployment Not Found</div>
+        <div class="message">
+            This preview deployment is no longer available. It was likely removed
+            when the pull request was closed or merged.
+        </div>
+        <div class="url-info" id="urlInfo"></div>
+        <div class="info">
+            💡 To find active PR deployments, check the open pull requests.
+        </div>
+        <div id="prLink"></div>
+    </div>
+
+    <script>
+        // Extract PR number and project from URL
+        const path = window.location.pathname;
+        const match = path.match(/\/(\d+)\/([^\/]+)/);
+        
+        if (match) {
+            const prNumber = match[1];
+            const projectName = match[2];
+            
+            document.getElementById('urlInfo').innerHTML = 
+                `Requested: <strong>PR #${prNumber}</strong> - Project: <strong>${projectName}</strong>`;
+            
+            document.getElementById('prLink').innerHTML = 
+                `<a href="https://github.com/cismet/carma/pull/${prNumber}" class="pr-link">
+                    View Pull Request #${prNumber} →
+                </a>`;
+        } else {
+            document.getElementById('urlInfo').innerHTML = 
+                'Could not determine PR number from URL';
+            
+            document.getElementById('prLink').innerHTML = 
+                `<a href="https://github.com/cismet/carma/pulls" class="pr-link">
+                    View Pull Requests →
+                </a>`;
+        }
+    </script>
+</body>
+</html>
