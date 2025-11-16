@@ -88,28 +88,30 @@
     </div>
 
     <script>
-        // Extract PR number and project from URL
+        // Extract project name and PR number from URL path
+        // New format: /[project-name]/[pr-number]/
+        // Example: /kita-finder/461/
         const path = window.location.pathname;
-        const match = path.match(/\/(\d+)\/([^\/]+)/);
-        
+        const match = path.match(/\/([^\/]+)\/(\d+)/);
+
         if (match) {
-            const prNumber = match[1];
-            const projectName = match[2];
-            
-            document.getElementById('urlInfo').innerHTML = 
+            const projectName = match[1];
+            const prNumber = match[2];
+
+            document.getElementById('urlInfo').innerHTML =
                 `Requested: <strong>PR #${prNumber}</strong> - Project: <strong>${projectName}</strong>`;
-            
-            document.getElementById('prLink').innerHTML = 
-                `<a href="https://github.com/cismet/carma/pull/${prNumber}" class="pr-link">
+
+            document.getElementById('prLink').innerHTML =
+                `<a href="https://github.com/cismet/${projectName}/pull/${prNumber}" class="pr-link">
                     View Pull Request #${prNumber} →
                 </a>`;
         } else {
-            document.getElementById('urlInfo').innerHTML = 
+            document.getElementById('urlInfo').innerHTML =
                 'Could not determine PR number from URL';
-            
-            document.getElementById('prLink').innerHTML = 
-                `<a href="https://github.com/cismet/carma/pulls" class="pr-link">
-                    View Pull Requests →
+
+            document.getElementById('prLink').innerHTML =
+                `<a href="https://github.com/cismet" class="pr-link">
+                    View cismet on GitHub →
                 </a>`;
         }
     </script>
